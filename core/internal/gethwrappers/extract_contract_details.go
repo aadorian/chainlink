@@ -164,6 +164,3 @@ func init() {
 		panic("constantBinaryMetadataHash does not match reversedMetaData regex")
 	}
 }
-
-// ascii matches any ascii string
-var ascii = regexp.MustCompile("^[[:ascii:]]*$")
