@@ -140,8 +140,6 @@ describe('Operator', () => {
     })
 
     // TODO: Called by non-owner
-
-
   })
 
   describe('#distributeFunds', () => {
