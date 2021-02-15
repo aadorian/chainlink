@@ -133,7 +133,15 @@ describe('Operator', () => {
         assert.equal(await operatorForwarder.authorizedSender2(), newSenders[1])
         assert.equal(await operatorForwarder.authorizedSender3(), newSenders[2])
       })
+
+      // TODO: Less than 2 authorized senders
+
+      // TODO: No authorized senders
     })
+
+    // TODO: Called by non-owner
+
+
   })
 
   describe('#distributeFunds', () => {
