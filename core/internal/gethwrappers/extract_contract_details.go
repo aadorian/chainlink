@@ -124,9 +124,14 @@ func replaceMetadata(beltArtifact []byte) (*binaryContractSections, error) {
 	if len(rv.String()) != len(rawBinary) {
 		panic("reconstruction with fixed metadata hash failed")
 	}
-	_, err := hex.DecodeString(rv.staticData)
+	rawCode, err := hex.DecodeString(rv.staticData)
 	if err != nil {
 		panic(errors.Wrapf(err, "can't fail, due to earlier hexutil.Decode check!"))
+	}
+	if !ascii.Match(rawCode) {
+		// So far, we have only seen the compiler store ASCII strings after the
+		// metadata hash. Fail noisily if we see something else(?)
+		panic(errors.Errorf("non-ascii"))
 	}
 	return rv, nil
 }
@@ -164,3 +169,6 @@ func init() {
 		panic("constantBinaryMetadataHash does not match reversedMetaData regex")
 	}
 }
+
+// ascii matches any ascii string
+var ascii = regexp.MustCompile("^[[:ascii:]]*$")
